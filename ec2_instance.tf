@@ -7,7 +7,7 @@ resource "aws_instance" "my_wp_instance" {
   key_name                    = "MyKp"
   count                       = 1
   associate_public_ip_address = false
-  user_data                   = file("../shell_script/configure_wordpress.sh")
+  user_data                   = file("configure_wordpress.sh")
   tags = {
     Name = "my_wp_instance"
   }
