@@ -7,10 +7,21 @@ resource "aws_instance" "my_wp_instance" {
   key_name                    = "MyKp"
   count                       = 1
   associate_public_ip_address = false
-  user_data                   = file("configure_wordpress.sh")
-  depends_on = [aws_db_instance.wp-db-cluster]
+  user_data                   = data.template_file.configure_wordpress.rendered
+  depends_on                  = [aws_db_instance.wp-db-cluster]
   tags = {
     Name = "my_wp_instance"
   }
 
+}
+
+data "template_file" "configure_wordpress" {
+  template = file("configure_wordpress.sh")
+
+  vars = {
+    db_username = aws_db_instance.wp-db-cluster.username
+    db_password = aws_db_instance.wp-db-cluster.password
+    db_host     = aws_db_instance.wp-db-cluster.endpoint
+    db_name     = "wordpress" # Replace with your actual database name
+  }
 }
