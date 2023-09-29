@@ -8,6 +8,7 @@ resource "aws_instance" "my_wp_instance" {
   count                       = 1
   associate_public_ip_address = false
   user_data                   = file("configure_wordpress.sh")
+  depends_on = [aws_db_instance.wp-db-cluster]
   tags = {
     Name = "my_wp_instance"
   }

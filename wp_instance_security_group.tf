@@ -12,11 +12,11 @@ resource "aws_security_group" "my_wp_SG" {
   }
 
   ingress {
-    description      = "mysql/aurora access"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    security_groups  = [aws_security_group.my_alb_SG.id]
+    description     = "mysql/aurora access"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.my_alb_SG.id]
   }
 
   egress {
