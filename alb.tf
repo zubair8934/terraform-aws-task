@@ -2,19 +2,20 @@
 # Creating Target Group
 resource "aws_lb_target_group" "My-Wp-TG" {
   health_check {
-    interval            = 30
+    interval            = 120
     path                = "/"
     protocol            = "HTTP"
-    timeout             = 5
-    healthy_threshold   = 5
-    unhealthy_threshold = 2
+    timeout             = 60
+    healthy_threshold   = 2
+    unhealthy_threshold = 5
   }
 
-  name        = "My-Wp-TG"
-  port        = 80
-  protocol    = "HTTP"
-  target_type = "instance"
-  vpc_id      = aws_vpc.my_wp_vpc.id
+  name             = "My-Wp-TG"
+  port             = 80
+  protocol         = "HTTP"
+  target_type      = "instance"
+  vpc_id           = aws_vpc.my_wp_vpc.id
+  protocol_version = "HTTP1"
 
   tags = {
     Name = "My-Wp-TG"
