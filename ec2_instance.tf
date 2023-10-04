@@ -8,7 +8,7 @@ resource "aws_instance" "my_wp_instance" {
   count                       = 1
   associate_public_ip_address = false
   user_data                   = data.template_file.configure_wordpress.rendered
-  depends_on                  = [aws_db_instance.wp-db-cluster]
+  depends_on                  = [aws_db_instance.wp-db-cluster, aws_efs_file_system.my_wp_efs, aws_efs_mount_target.efs_mount_tg]
   tags = {
     Name = "my_wp_instance"
   }
@@ -23,5 +23,7 @@ data "template_file" "configure_wordpress" {
     db_password = aws_db_instance.wp-db-cluster.password
     db_host     = aws_db_instance.wp-db-cluster.endpoint
     db_name     = "wordpress" # Replace with your actual database name
+    efs_dns     = aws_efs_file_system.my_wp_efs.dns_name
+    my_efs_ip   = aws_efs_mount_target.efs_mount_tg[0].ip_address
   }
 }
