@@ -26,7 +26,7 @@ resource "aws_autoscaling_policy" "scale_out_policy" {
   policy_type            = "TargetTrackingScaling"
   target_tracking_configuration {
     predefined_metric_specification {
-      predefined_metric_type = "ASGAverageCPUUtilization" # You can adjust this metric type as needed
+      predefined_metric_type = "ASGAverageCPUUtilization"
     }
     target_value = 1
   }
@@ -39,11 +39,11 @@ resource "aws_cloudwatch_metric_alarm" "scale_out_alarm" {
   alarm_name          = "scale-out-alarm"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = 2
-  metric_name         = "CPUUtilization" # Update with your actual metric name
+  metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 60 # Match the cooldown period of the scaling policies
+  period              = 60
   statistic           = "Average"
-  threshold           = 1 # Set your desired CPU utilization threshold for scaling out
+  threshold           = 1
   alarm_description   = "Scale out when CPU utilization is high"
   alarm_actions       = [aws_autoscaling_policy.scale_out_policy.arn]
   dimensions = {

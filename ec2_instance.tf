@@ -22,7 +22,7 @@ data "template_file" "configure_wordpress" {
     db_username = aws_db_instance.wp-db-cluster.username
     db_password = aws_db_instance.wp-db-cluster.password
     db_host     = aws_db_instance.wp-db-cluster.endpoint
-    db_name     = "wordpress" # Replace with your actual database name
+    db_name     = "wordpress"
     efs_dns     = aws_efs_file_system.my_wp_efs.dns_name
     my_efs_ip   = aws_efs_mount_target.efs_mount_tg[0].ip_address
   }

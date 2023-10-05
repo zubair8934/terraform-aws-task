@@ -26,12 +26,13 @@ resource "aws_route_table" "my_private_RT" {
   }
 }
 
-# Creating route associations for private Subnets
+# Creating route table associations for private Subnet 1
 resource "aws_route_table_association" "Private1RTAssociation" {
   subnet_id      = aws_subnet.us_east_1a_priv.id
   route_table_id = aws_route_table.my_private_RT.id
 }
 
+# Creating route associations for private Subnet 2
 resource "aws_route_table_association" "Private2RTAssociation" {
   subnet_id      = aws_subnet.us_east_1b_priv.id
   route_table_id = aws_route_table.my_private_RT.id

@@ -1,4 +1,4 @@
-# create the subnet group for the rds instance
+# creating subnet group for the rds instance
 resource "aws_db_subnet_group" "wp_db_subnet_group" {
   name = "wp_db_subnet_group"
   subnet_ids = [
@@ -13,7 +13,7 @@ resource "aws_db_subnet_group" "wp_db_subnet_group" {
 }
 
 
-# create the rds instance
+# creating rds instance
 resource "aws_db_instance" "wp-db-cluster" {
   engine                 = "mysql"
   engine_version         = "8.0.31"
@@ -25,7 +25,6 @@ resource "aws_db_instance" "wp-db-cluster" {
   allocated_storage      = 200
   db_subnet_group_name   = aws_db_subnet_group.wp_db_subnet_group.name
   vpc_security_group_ids = [aws_security_group.My-RDS-SG.id]
-  #   availability_zone       = 
   db_name             = "wordpress"
   skip_final_snapshot = true
 }

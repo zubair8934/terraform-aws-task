@@ -29,13 +29,7 @@ sudo sed -i "s/localhost/${db_host}/g" /var/www/html/wp-config.php
 sleep 5
 sudo yum install -y amazon-efs-utils
 sleep 3
-
-# sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport "${efs_dns}":/ /var/www/html/wp-content
-
 sudo mkdir /var/www/html/wp-content/uploads
 sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport ${my_efs_ip}:/ /var/www/html/wp-content/uploads
-
-sleep 10
-# sudo mkdir /var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/2023 /var/www/html/wp-content/uploads/2023/10
-# sudo chmod 777 /var/www/html/wp-content/uploads /var/www/html/wp-content/uploads/2023 /var/www/html/wp-content/uploads/2023/10
+sleep 5
 sudo chmod 777 /var/www/html/wp-content/uploads
