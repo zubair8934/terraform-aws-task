@@ -25,6 +25,6 @@ resource "aws_db_instance" "wp-db-cluster" {
   allocated_storage      = 200
   db_subnet_group_name   = aws_db_subnet_group.wp_db_subnet_group.name
   vpc_security_group_ids = [aws_security_group.My-RDS-SG.id]
-  db_name             = "wordpress"
-  skip_final_snapshot = true
+  db_name                = "wordpress"
+  skip_final_snapshot    = true
 }

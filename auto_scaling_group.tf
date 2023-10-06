@@ -1,15 +1,18 @@
 # Create Auto Scaling Group
 resource "aws_autoscaling_group" "my_wp_auto_scaling" {
-  name                 = "my_wp_auto_scaling"
-  desired_capacity     = 2
-  max_size             = 5
-  min_size             = 1
-  force_delete         = true
-  depends_on           = [aws_lb.My-Wp-ALB]
-  target_group_arns    = ["${aws_lb_target_group.My-Wp-TG.arn}"]
-  health_check_type    = "EC2"
-  launch_configuration = aws_launch_configuration.wp-launch-template.name
-  vpc_zone_identifier  = ["${aws_subnet.us_east_1a_priv.id}", "${aws_subnet.us_east_1b_priv.id}"]
+  name              = "my_wp_auto_scaling"
+  desired_capacity  = 2
+  max_size          = 5
+  min_size          = 1
+  force_delete      = true
+  depends_on        = [aws_lb.My-Wp-ALB]
+  target_group_arns = ["${aws_lb_target_group.My-Wp-TG.arn}"]
+  health_check_type = "EC2"
+  launch_template {
+    id      = aws_launch_template.wp-launch-template.id
+    version = "$Latest"
+  }
+  vpc_zone_identifier = ["${aws_subnet.us_east_1a_priv.id}", "${aws_subnet.us_east_1b_priv.id}"]
 
   tag {
     key                 = "Name"
