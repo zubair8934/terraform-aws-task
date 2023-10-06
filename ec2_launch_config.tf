@@ -14,5 +14,6 @@ resource "aws_launch_template" "wp-launch-template" {
     }
   }
 
+
   depends_on = [aws_db_instance.wp-db-cluster, aws_efs_file_system.my_wp_efs, aws_efs_mount_target.efs_mount_tg]
 }
